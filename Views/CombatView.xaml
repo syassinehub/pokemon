@@ -1,0 +1,32 @@
+<Window x:Class="POkemonLikeCsharpB2.Views.CombatView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Combat" Height="400" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Zone de combat -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel>
+                <TextBlock Text="Votre Monstre" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <TextBlock Name="PlayerMonsterName"/>
+                <ProgressBar Name="PlayerMonsterHP" Maximum="100" Height="20" Width="200"/>
+            </StackPanel>
+            <TextBlock Text="VS" FontWeight="Bold" FontSize="20" Margin="30,0"/>
+            <StackPanel>
+                <TextBlock Text="Ennemi" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <TextBlock Name="EnemyMonsterName"/>
+                <ProgressBar Name="EnemyMonsterHP" Maximum="100" Height="20" Width="200"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Actions -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Attaquer" Click="AttackButton_Click"/>
+            <Button Content="Relancer Combat" Click="RestartCombatButton_Click" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

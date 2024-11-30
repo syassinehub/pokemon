@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
 C:\Users\yassi\source\repos\POkemonLikeCsharpB2\POkemonLikeCsharpB2\App.xaml
-11407045341
+6-1015912713
 
-6-1813459872
+21874501363
 231835658393
-MainWindow.xaml;
+MainWindow.xaml;Views\CombatView.xaml;Views\LoginView.xaml;Views\MonsterManagementView.xaml;Views\SettingsView.xaml;Views\SpellsView.xaml;
 
-False
+True
 
