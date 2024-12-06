@@ -1,43 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.Input;
+using POkemonLikeCsharpB2.ViewModels;
+using System.Configuration;
+using System.Windows.Input;
 
-namespace POkemonLikeCsharpB2.ViewModels
+public class SettingsViewModel : BaseViewModel
 {
-    public class SettingsViewModel : BaseViewModel
+    private string _connectionString;
+    public string ConnectionString
     {
-        private const string ConfigFile = "db_config.txt";
-        private string _connectionString;
-
-        public string ConnectionString
+        get => _connectionString;
+        set
         {
-            get => _connectionString;
-            set
-            {
-                _connectionString = value;
-                OnPropertyChanged(nameof(ConnectionString));
-            }
+            _connectionString = value;
+            OnPropertyChanged();
         }
+    }
 
-        public SettingsViewModel()
-        {
-            LoadConnectionString();
-        }
+    public ICommand SaveSettingsCommand { get; }
 
-        private void LoadConnectionString()
-        {
-            if (File.Exists(ConfigFile))
-            {
-                ConnectionString = File.ReadAllText(ConfigFile);
-            }
-        }
+    public SettingsViewModel()
+    {
+        // Charger la chaîne de connexion depuis un fichier de configuration ou autre source.
+        _connectionString = ConfigurationManager.AppSettings["DatabaseConnection"];
+        SaveSettingsCommand = new RelayCommand(SaveSettings);
+    }
 
-        public void SaveConnectionString()
-        {
-            File.WriteAllText(ConfigFile, ConnectionString);
-        }
+    private void SaveSettings()
+    {
+        // Enregistrer la chaîne de connexion dans un fichier de configuration.
+        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        config.AppSettings.Settings["DatabaseConnection"].Value = _connectionString;
+        config.Save(ConfigurationSaveMode.Modified);
+        ConfigurationManager.RefreshSection("appSettings");
     }
 }

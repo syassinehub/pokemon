@@ -1,33 +1,47 @@
 <Window x:Class="POkemonLikeCsharpB2.Views.MonsterManagementView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
         Title="Gestion des Monstres" Height="400" Width="600">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+	<Window.DataContext>
+		<!-- Instancie automatiquement le ViewModel -->
+		<local:MonsterManagementViewModel />
+	</Window.DataContext>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="3*"/>
+		</Grid.ColumnDefinitions>
 
-        <!-- Liste des monstres -->
-        <ListView Name="MonstersListView" Grid.Column="0"
-                  SelectionChanged="MonstersListView_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Nom" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                    <GridViewColumn Header="PV" DisplayMemberBinding="{Binding Health}" Width="100"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+		<!-- Liste des monstres -->
+		<ListView ItemsSource="{Binding Monsters}"
+                  SelectedItem="{Binding SelectedMonster, Mode=TwoWay}"
+                  Grid.Column="0">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Nom" DisplayMemberBinding="{Binding Name}" Width="150"/>
+					<GridViewColumn Header="PV" DisplayMemberBinding="{Binding Health}" Width="100"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
 
-        <!-- Détails du monstre -->
-        <StackPanel Grid.Column="1" Margin="10">
-            <TextBlock Text="Détails du Monstre" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-            <TextBlock Text="Nom :" FontWeight="Bold"/>
-            <TextBlock Name="MonsterNameTextBlock"/>
-            <TextBlock Text="PV :" FontWeight="Bold" Margin="0,10,0,0"/>
-            <TextBlock Name="MonsterHealthTextBlock"/>
-            <TextBlock Text="Sorts :" FontWeight="Bold" Margin="0,10,0,0"/>
-            <ListBox Name="SpellsListBox"/>
-        </StackPanel>
-    </Grid>
+		<!-- DÃ©tails du monstre -->
+		<StackPanel Grid.Column="1" Margin="10">
+			<TextBlock Text="DÃ©tails du Monstre" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+			<TextBlock Text="Nom :" FontWeight="Bold"/>
+			<TextBlock Text="{Binding SelectedMonster.Name}"/>
+			<TextBlock Text="PV :" FontWeight="Bold" Margin="0,10,0,0"/>
+			<TextBlock Text="{Binding SelectedMonster.Health}"/>
+			<TextBlock Text="Sorts :" FontWeight="Bold" Margin="0,10,0,0"/>
+			<ListBox ItemsSource="{Binding SelectedMonster.Spells}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Name}" />
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</StackPanel>
+	</Grid>
 </Window>

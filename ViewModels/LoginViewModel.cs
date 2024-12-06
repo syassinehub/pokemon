@@ -1,50 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using POkemonLikeCsharpB2.Model;
+using System.Windows;
 
 namespace POkemonLikeCsharpB2.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel
     {
-        private string _username = string.Empty;
-        private string _password = string.Empty;
-
-        public string Username
+        public bool AuthenticateUser(string username, string password)
         {
-            get => _username;
-            set
+            using (var dbContext = new GameDbContext())
             {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
+                string hashedPassword = HashPassword(password);
+                var user = dbContext.Logins
+                    .FirstOrDefault(u => u.Username == username && u.PasswordHash == hashedPassword);
+
+                if (user != null)
+                {
+                    return true; // Connexion réussie
+                }
+
+                MessageBox.Show("Nom d'utilisateur ou mot de passe incorrect.");
+                return false; // Échec de connexion
             }
         }
 
-        public string Password
+        private string HashPassword(string password)
         {
-            get => _password;
-            set
+            using (var sha256 = SHA256.Create())
             {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
+                byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
             }
-        }
-
-        public bool Login()
-        {
-            using var db = new ExerciceMonsterContext();
-            string passwordHash = ComputeHash(Password);
-
-            return db.Logins.Any(u => u.Username == Username && u.PasswordHash == passwordHash);
-        }
-
-        private static string ComputeHash(string input)
-        {
-            using var sha256 = SHA256.Create();
-            byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
-            return Convert.ToBase64String(bytes);
         }
     }
 }
