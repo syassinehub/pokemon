@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("POkemonLikeCsharpB2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0006981b74fc41af4074409dc819f4f96eb103d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8131f7497fe9b87006bcff057b494149dade24af")]
 [assembly: System.Reflection.AssemblyProductAttribute("POkemonLikeCsharpB2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("POkemonLikeCsharpB2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

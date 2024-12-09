@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
+using POkemonLikeCsharpB2.Model;
 
 namespace POkemonLikeCsharpB2.ViewModels
 {
@@ -8,7 +9,7 @@ namespace POkemonLikeCsharpB2.ViewModels
     {
         public bool AuthenticateUser(string username, string password)
         {
-            using (var dbContext = new GameDbContext())
+            using (var dbContext = new ExerciceMonsterContext())
             {
                 string hashedPassword = HashPassword(password);
                 var user = dbContext.Logins

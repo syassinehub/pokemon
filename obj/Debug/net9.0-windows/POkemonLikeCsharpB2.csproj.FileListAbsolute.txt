@@ -144,3 +144,5 @@ C:\Users\yassi\source\repos\POkemonLikeCsharpB2\POkemonLikeCsharpB2\obj\Debug\ne
 C:\Users\yassi\source\repos\POkemonLikeCsharpB2\POkemonLikeCsharpB2\obj\Debug\net9.0-windows\Views\LoginView.baml
 C:\Users\yassi\source\repos\POkemonLikeCsharpB2\POkemonLikeCsharpB2\obj\Debug\net9.0-windows\Views\CombatView.g.cs
 C:\Users\yassi\source\repos\POkemonLikeCsharpB2\POkemonLikeCsharpB2\obj\Debug\net9.0-windows\Views\LoginView.g.cs
+C:\Users\yassi\source\repos\POkemonLikeCsharpB2\POkemonLikeCsharpB2\obj\Debug\net9.0-windows\Views\MonsterManagementView.baml
+C:\Users\yassi\source\repos\POkemonLikeCsharpB2\POkemonLikeCsharpB2\obj\Debug\net9.0-windows\Views\MonsterManagementView.g.cs
